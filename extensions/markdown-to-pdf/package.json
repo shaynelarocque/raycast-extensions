@@ -1,0 +1,91 @@
+{
+  "$schema": "https://www.raycast.com/schemas/extension.json",
+  "name": "markdown-to-pdf",
+  "title": "Markdown to PDF",
+  "description": "Convert markdown into beautifully styled PDFs using Ask AI.",
+  "icon": "icon.png",
+  "author": "shaynelarocque",
+  "categories": [
+    "Productivity",
+    "Developer Tools"
+  ],
+  "platforms": [
+    "macOS"
+  ],
+  "license": "MIT",
+  "commands": [
+    {
+      "name": "convert-markdown",
+      "title": "Convert Markdown",
+      "description": "Convert markdown into a styled PDF via Ask AI",
+      "mode": "no-view"
+    }
+  ],
+  "tools": [
+    {
+      "name": "convert-markdown-to-doc",
+      "title": "Convert Markdown to PDF",
+      "description": "Convert markdown content into a styled PDF file."
+    }
+  ],
+  "preferences": [
+    {
+      "name": "customThemeName",
+      "title": "Custom Theme Name",
+      "description": "A name for your custom theme (e.g. 'corporate'). Use this name when asking the AI to apply your theme.",
+      "type": "textfield",
+      "required": false,
+      "placeholder": "my-theme"
+    },
+    {
+      "name": "customAccentColor",
+      "title": "Custom Accent Color",
+      "description": "Hex color for headings, links, and table headers (e.g. #2563eb).",
+      "type": "textfield",
+      "required": false,
+      "placeholder": "#2563eb"
+    },
+    {
+      "name": "customTextColor",
+      "title": "Custom Text Color",
+      "description": "Hex color for body text (e.g. #111827).",
+      "type": "textfield",
+      "required": false,
+      "placeholder": "#111827"
+    },
+    {
+      "name": "customSurfaceColor",
+      "title": "Custom Surface Color",
+      "description": "Hex color for code block and table stripe backgrounds (e.g. #f8fafc).",
+      "type": "textfield",
+      "required": false,
+      "placeholder": "#f8fafc"
+    }
+  ],
+  "ai": {
+    "description": "- Use this tool when the user provides markdown content and asks for a PDF.\n- Optional layout controls: `font` (`helvetica|times|courier`), `fontSize` (8-18), `lineSpacing` (1.0-2.4), and per-side margins `marginTop|marginRight|marginBottom|marginLeft` (24-120).\n- Optional `theme`: built-in themes are `default`, `minimal`, `executive`, `ocean`, `warm`. The user may also have a custom theme configured in extension preferences — use the name they specify.\n- If no output directory is provided, use `~/Downloads`.\n- Return the final absolute path to the generated file."
+  },
+  "dependencies": {
+    "@raycast/api": "^1.104.6",
+    "markdown-it": "^14.1.1",
+    "pdf-lib": "^1.17.1"
+  },
+  "devDependencies": {
+    "@raycast/eslint-config": "^2.1.1",
+    "@types/markdown-it": "^14.1.2",
+    "@types/node": "22.13.10",
+    "@types/react": "19.0.10",
+    "eslint": "^9.39.1",
+    "prettier": "^3.7.4",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
+  },
+  "scripts": {
+    "build": "ray build",
+    "dev": "ray develop",
+    "fix-lint": "ray lint --fix",
+    "lint": "ray lint",
+    "publish": "npx @raycast/api@latest publish",
+    "test": "node --test --import tsx tests/**/*.test.ts"
+  }
+}
