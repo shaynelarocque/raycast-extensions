@@ -103,15 +103,8 @@ export function resolveTheme(rawTheme?: string): ThemePalette {
   // Check custom theme from preferences
   try {
     // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const api = require("@raycast/api") as {
-      getPreferenceValues: () => {
-        customThemeName?: string;
-        customAccentColor?: string;
-        customTextColor?: string;
-        customSurfaceColor?: string;
-      };
-    };
-    const prefs = api.getPreferenceValues();
+    const { getPreferenceValues } = require("@raycast/api") as typeof import("@raycast/api");
+    const prefs = getPreferenceValues<Preferences>();
 
     const customName = prefs.customThemeName?.trim().toLowerCase();
     if (customName && customName === name) {

@@ -1,6 +1,6 @@
 # Changelog
 
-## [Initial Release] - 2026-03-21
+## [Initial Release] - {PR_MERGE_DATE}
 
 - AI tool for converting markdown to PDF
 - Custom PDF renderer with styled text, lists, tables, code blocks, and hyperlinks
