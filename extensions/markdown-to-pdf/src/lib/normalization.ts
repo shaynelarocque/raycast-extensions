@@ -10,6 +10,7 @@ import {
   type DocumentLayoutOptions,
   type FontChoice,
   type NumericInput,
+  type OutputFormat,
   type ThemePalette,
 } from "./types";
 
@@ -102,13 +103,15 @@ export function resolveTheme(rawTheme?: string): ThemePalette {
   // Check custom theme from preferences
   try {
     // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const { getPreferenceValues } = require("@raycast/api");
-    const prefs = getPreferenceValues<{
-      customThemeName?: string;
-      customAccentColor?: string;
-      customTextColor?: string;
-      customSurfaceColor?: string;
-    }>();
+    const api = require("@raycast/api") as {
+      getPreferenceValues: () => {
+        customThemeName?: string;
+        customAccentColor?: string;
+        customTextColor?: string;
+        customSurfaceColor?: string;
+      };
+    };
+    const prefs = api.getPreferenceValues();
 
     const customName = prefs.customThemeName?.trim().toLowerCase();
     if (customName && customName === name) {
