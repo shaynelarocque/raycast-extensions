@@ -63,7 +63,67 @@
     }
   ],
   "ai": {
-    "description": "- Use this tool when the user provides markdown content and asks for a PDF.\n- Optional layout controls: `font` (`helvetica|times|courier`), `fontSize` (8-18), `lineSpacing` (1.0-2.4), and per-side margins `marginTop|marginRight|marginBottom|marginLeft` (24-120).\n- Optional `theme`: built-in themes are `default`, `minimal`, `executive`, `ocean`, `warm`. The user may also have a custom theme configured in extension preferences — use the name they specify.\n- If no output directory is provided, use `~/Downloads`.\n- Return the final absolute path to the generated file."
+    "description": "- Use this tool when the user provides markdown content and asks for a PDF.\n- Optional layout controls: `font` (`helvetica|times|courier`), `fontSize` (8-18), `lineSpacing` (1.0-2.4), and per-side margins `marginTop|marginRight|marginBottom|marginLeft` (24-120).\n- Optional `theme`: built-in themes are `default`, `minimal`, `executive`, `ocean`, `warm`. The user may also have a custom theme configured in extension preferences — use the name they specify.\n- If no output directory is provided, use `~/Downloads`.\n- Return the final absolute path to the generated file.",
+    "evals": [
+      {
+        "input": "@markdown-to-pdf Convert this to a PDF:\n# Meeting Notes\n- Action item 1\n- Action item 2",
+        "mocks": {
+          "convert-markdown-to-doc": "/Users/user/Downloads/meeting-notes.pdf"
+        },
+        "expected": [
+          {
+            "callsTool": {
+              "name": "convert-markdown-to-doc",
+              "arguments": {
+                "content": {
+                  "includes": "Meeting Notes"
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "input": "@markdown-to-pdf Make a PDF of this table in the ocean theme with Courier font:\n| Name | Score |\n|------|-------|\n| Alice | 95 |\n| Bob | 87 |",
+        "mocks": {
+          "convert-markdown-to-doc": "/Users/user/Downloads/document.pdf"
+        },
+        "expected": [
+          {
+            "callsTool": {
+              "name": "convert-markdown-to-doc",
+              "arguments": {
+                "content": {
+                  "includes": "Name"
+                },
+                "theme": "ocean",
+                "font": "courier"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "input": "@markdown-to-pdf Generate a PDF from this with large text (16pt) and double spacing:\n# Report\nThis is the report body.",
+        "mocks": {
+          "convert-markdown-to-doc": "/Users/user/Downloads/report.pdf"
+        },
+        "expected": [
+          {
+            "callsTool": {
+              "name": "convert-markdown-to-doc",
+              "arguments": {
+                "content": {
+                  "includes": "Report"
+                },
+                "fontSize": 16,
+                "lineSpacing": 2.0
+              }
+            }
+          }
+        ]
+      }
+    ]
   },
   "dependencies": {
     "@raycast/api": "^1.104.6",
